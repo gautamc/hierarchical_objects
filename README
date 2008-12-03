@@ -18,5 +18,6 @@
     http://openacs.org/doc/permissions-tediously-explained.html#acs_object_party_privilege_map
     http://openacs.org/doc/tutorial-hierarchical.html
 
+4. Limitations: Works only with mysql as of now.
 
  - Gautam Chekuri
