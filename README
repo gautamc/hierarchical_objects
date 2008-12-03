@@ -3,7 +3,7 @@
 
      	  hierarchical_objects/
             |
-	    |-> boilerplate.rb
+            |-> boilerplate.rb
             |
             |-> migrations.rb
             |
