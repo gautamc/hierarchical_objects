@@ -1,4 +1,4 @@
-1. A simple implementation of Miguel Sofer algorithm using ActiveRecord.
+1. A simple implementation of Miguel Sofer's algorithm using ActiveRecord.
 2. Layout :
 
      	  hierarchical_objects/
