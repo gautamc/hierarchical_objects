@@ -1,0 +1,22 @@
+1. A simple implementation of Miguel Sofer algorithm using ActiveRecord.
+2. Layout :
+
+     	  hierarchical_objects/
+            |
+	    |-> boilerplate.rb
+            |
+            |-> migrations.rb
+            |
+            |-> models.rb   --> Has the majority of the implementation
+            |
+            |-> main.rb     --> script that can be run the shell to see things working
+
+3. Links:
+
+    http://openacs.org/forums/message-view?message_id=16799
+    http://www.utdt.edu/~mig/trees.tar.gz
+    http://openacs.org/doc/permissions-tediously-explained.html#acs_object_party_privilege_map
+    http://openacs.org/doc/tutorial-hierarchical.html
+
+
+ - Gautam Chekuri
