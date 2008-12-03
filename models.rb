@@ -14,6 +14,8 @@ class HierarchicalObject < ActiveRecord::Base
     begin
       parent_rec = find( record.parent_id )
       prev_sortkey = record.sortkey
+      ## Note1: COMMENTING OUT BASE159 ENCODING UNTIL I ADDRESS ISSUE RELATED TO
+      ## LEXICAL ORDERING OF THE CHARACTERS AND THE ORDERING OF THE NODES
       #base159_id = toBase159( tomvgID( record.id ) )
       base159_id = tomvgID( record.id )
       record.sortkey = parent_rec.sortkey + "/" + base159_id.to_s
@@ -94,6 +96,7 @@ class HierarchicalObject < ActiveRecord::Base
     base10 ||= 0
     mvgid = (base10.to_s.length - 1).to_s
     mvgid += base10.to_s
+    # Refer to Note1
     #mvgid.to_i
     mvgid
   end
