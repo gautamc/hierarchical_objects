@@ -91,3 +91,6 @@ node.ancestors.each {
   |obj|
   print obj.sortkey, " : ", obj.id, " : ", obj.parent_id, "\n"
 }
+
+#node = HierarchicalObject.find( 19 )
+#node.destroy
