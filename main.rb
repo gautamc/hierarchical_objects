@@ -6,8 +6,8 @@ require 'migrations'
 require 'models'
 
 # run the migrations
-#CreateTreeEncoding.down
-#CreateTreeEncoding.up
+CreateTreeEncoding.down
+CreateTreeEncoding.up
 
 CreateHierarchicalObjects.down
 CreateHierarchicalObjects.up
