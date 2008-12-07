@@ -14,10 +14,7 @@ class HierarchicalObject < ActiveRecord::Base
     begin
       parent_rec = find( record.parent_id )
       prev_sortkey = record.sortkey
-      ## Note1: COMMENTING OUT BASE159 ENCODING UNTIL I ADDRESS ISSUE RELATED TO
-      ## LEXICAL ORDERING OF THE CHARACTERS AND THE ORDERING OF THE NODES
-      #base159_id = toBase159( tomvgID( record.id ) )
-      base159_id = tomvgID( record.id )
+      base159_id = tomvgID( toBase159( record.id ) )
       record.sortkey = parent_rec.sortkey + "/" + base159_id.to_s
       unless ( prev_sortkey.nil? )
         # currently, we don't allow moving a object in such a way that it becomes
@@ -83,21 +80,21 @@ class HierarchicalObject < ActiveRecord::Base
         |kvp, obj| kvp.merge! obj.deci => obj.code
       }
     end
-    
+
+    base10 ||= 0
     base159 = ""
-    while( base10 != 0 )
+    loop do
       base159 = (@@enc_map[base10 % 159]).to_s + base159.to_s
       base10 = base10 / 159
+      break if( base10 == 0 )
     end
     base159
   end
   
-  def self.tomvgID(base10)
-    base10 ||= 0
-    mvgid = (base10.to_s.length - 1).to_s
-    mvgid += base10.to_s
-    # Refer to Note1
-    #mvgid.to_i
+  def self.tomvgID(base159)
+    base159 ||= "0"
+    mvgid = (toBase159(base159.to_s.length - 1)).to_s
+    mvgid += base159.to_s
     mvgid
   end
 end
