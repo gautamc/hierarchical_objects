@@ -41,7 +41,10 @@ class HierarchicalObject < ActiveRecord::Base
   # before deleteing an object, update sortkeys of all its child objects
   before_destroy lambda {
     |record|
-    update_all("sortkey=replace(sortkey, '" + record.sortkey+"/" + "'," + "'" + record.sortkey.gsub( /\/[^\/]+$/, '/') + "')", ["sortkey like ?", record.sortkey+"/%"])
+    transaction do
+      update_all("sortkey=replace(sortkey, '" + record.sortkey+"/" + "'," + "'" + record.sortkey.gsub( /\/[^\/]+$/, '/') + "')", ["sortkey like ?", record.sortkey+"/%"])
+      update_all("parent_id = #{record.parent_id}", ["parent_id = ?", record.id])
+    end
     return true
   }
   
