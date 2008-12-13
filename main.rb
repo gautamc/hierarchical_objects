@@ -15,7 +15,13 @@ CreateHierarchicalObjects.up
 
 root = HierarchicalObject.new
 root.id = 1
-root.save
+saved_p = root.save
+puts "1: #{saved_p}"
+
+root2 = HierarchicalObject.new
+root2.id = 2
+saved_p = root2.save
+puts "2: #{saved_p}"
 
 nid = 2
 for i in 1 .. 1

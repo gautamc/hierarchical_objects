@@ -7,8 +7,12 @@ class HierarchicalObject < ActiveRecord::Base
     
     # if root object(empty sortkey) doesn't already exist
     if record.parent_id.nil?
-      record.sortkey = ""
-      return true
+      unless exists?( :sortkey => "" )
+        record.sortkey = ""
+        return true
+      else
+        return false
+      end
     end
     
     begin
@@ -83,7 +87,7 @@ class HierarchicalObject < ActiveRecord::Base
         |kvp, obj| kvp.merge! obj.deci => obj.code
       }
     end
-
+    
     base10 ||= 0
     base159 = ""
     loop do
