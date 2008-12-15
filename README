@@ -10,6 +10,8 @@
             |-> models.rb   --> Has the majority of the implementation
             |
             |-> main.rb     --> script that can be run the shell to see things working
+            |
+            |-> main_rspec.rb -> the rspec description
 
 3. Links:
 
