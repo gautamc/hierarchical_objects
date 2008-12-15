@@ -24,9 +24,10 @@ class HierarchicalObject < ActiveRecord::Base
         # currently, we don't allow moving a object in such a way that it becomes
         # a child object within the subtree rooted under it
         unless ( record.sortkey.match( "^#{prev_sortkey}/.+" ).nil? )
+          record.sortkey = prev_sortkey
           return false
         end
-        
+
         # find the subtree in record, not including record
         transaction do
           descendents = find(:all, :conditions => ["sortkey like ?", prev_sortkey+"/%"])
