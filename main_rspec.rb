@@ -101,7 +101,7 @@ describe HierarchicalObject, "when building a tree of objects" do
   end
   
   it "should have ancestors" do
-    puts HierarchicalObject.find( 21 ).ancestors.length.should eql( 11 )
+    HierarchicalObject.find( 21 ).ancestors.length.should eql( 11 )
   end
   
   after(:each) do
