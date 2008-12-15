@@ -21,7 +21,7 @@ describe HierarchicalObject, "when building a tree of objects" do
   before(:each) do
   end
   
-  it "should have empty sortkey and parent_d for root object" do
+  it "should have empty sortkey and parent_id for root object" do
     root = HierarchicalObject.new
     root.id = 1
     saved_p = root.save
