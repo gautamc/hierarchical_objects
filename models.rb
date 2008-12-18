@@ -27,11 +27,10 @@ class HierarchicalObject < ActiveRecord::Base
           record.sortkey = prev_sortkey
           return false
         end
-
+        
         # find the subtree in record, not including record
         transaction do
-          descendents = find(:all, :conditions => ["sortkey like ?", prev_sortkey+"/%"])
-          if ( descendents.length > 0 )
+          if ( count(:conditions => ["sortkey like ?", prev_sortkey+"/%"]) > 0 )
             #update the sortkeys in the subtree
             update_all("sortkey=replace(sortkey, '" + prev_sortkey.gsub( /\/[^\/]+$/, '/') + "'," + "'" + parent_rec.sortkey+"/" + "')", ["sortkey like ?", prev_sortkey+"/%"])
           end
