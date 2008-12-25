@@ -22,4 +22,77 @@
 
 4. Limitations: Works only with mysql as of now.
 
+5. Description:
+
+   a) A hierarchical object is a object which has a parent hierarchical object.
+      Hence, there can be a tree of hierarchical object.
+
+   b) Given a tree of hierarchical objects, each object can answer the following questions:
+      1) What is the subtree rooted under this hierarchical object?
+      2) What is the ordered list of ancestor objects for this hierarchical object?
+      3) What are the sibiling hierarchical objects of this hierarchical object?
+      4) What is the depth of this hierarchical objects in its tree?
+
+   c) An implementation of a tree data structure using a relational database would have to address
+      two issues related to each object:
+      1) The object's identification
+      2) The object's position in the tree
+
+      In the current implementation:
+      1) The primary key field is used to unquiely identify the object.
+      2) The sortkey field stores the "genelogical order" of an object, as described in Miguel Sofer's paper.
+      3) The sortkey is not derived from the object's primary key indentifier (unlike as described in
+         Sofer's paper).
+      4) The sortkey is a base159 encoded string. Lexical ordering of sortkeys forms the basis for
+         representing the tree. Tree operations can be performed using lexical comparsions or substring
+         operations in the sortkey.
+
+   d) Example:
+      1) Creating a root object:
+
+      root = HierarchicalObject.new
+      root.id = 1999
+      saved_p = root.save
+
+      2) Creating a child object:
+
+      node2 = HierarchicalObject.new
+      node2.id = 2876
+      node2.parent_id = 1999
+      node2.save
+
+      node2 = HierarchicalObject.new
+      node2.id = 2877
+      node2.parent_id = 1999
+      node2.save
+
+      Upon execution of above, we would have the following rows:
+
+      mysql> select * from hierarchical_objects order by sortkey;
+      +------+-----------+--------------+
+      | id   | parent_id | sortkey      |
+      +------+-----------+--------------+
+      | 1999 |      NULL | /00          | 
+      | 2876 |      1999 | /00/00       | 
+      | 2877 |      1999 | /00/01       | 
+      +------+-----------+--------------+
+
+      Notice, how the sortkey holds both the depth and the ordering of a record.
+
+      3) To delete a (sub)tree we can do the following:
+
+      HierarchicalObject.find( 1999 ).subtree.reverse.each {
+        |obj|
+        obj.destroy
+      }
+
+      4) We can also iterate through the ordered list of ancestors:
+
+      HierarchicalObject.find( 21 ).ancestors.each {
+        |obj|
+        .....
+      }
+
+      For a more complete description of the currently implemented features and examples view main_rspec.rb
+
  - Gautam Chekuri
