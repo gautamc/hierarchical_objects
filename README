@@ -24,8 +24,8 @@
 
 5. Description:
 
-   a) A hierarchical object is a object which has a parent hierarchical object.
-      Hence, there can be a tree of hierarchical object.
+   a) A hierarchical object is an object which has a parent hierarchical object.
+      Hence, there can be a tree of hierarchical objects.
 
    b) Given a tree of hierarchical objects, each object can answer the following questions:
       1) What is the subtree rooted under this hierarchical object?
@@ -41,11 +41,11 @@
       In the current implementation:
       1) The primary key field is used to unquiely identify the object.
       2) The sortkey field stores the "genelogical order" of an object, as described in Miguel Sofer's paper.
-      3) The sortkey is not derived from the object's primary key indentifier (unlike as described in
+      3) The sortkey is not derived from the object's primary key identifier (unlike as described in
          Sofer's paper).
       4) The sortkey is a base159 encoded string. Lexical ordering of sortkeys forms the basis for
          representing the tree. Tree operations can be performed using lexical comparsions or substring
-         operations in the sortkey.
+         operations on the sortkey.
 
    d) Example:
       1) Creating a root object:
@@ -61,10 +61,10 @@
       node2.parent_id = 1999
       node2.save
 
-      node2 = HierarchicalObject.new
-      node2.id = 2877
-      node2.parent_id = 1999
-      node2.save
+      node3 = HierarchicalObject.new
+      node3.id = 2877
+      node3.parent_id = 1999
+      node3.save
 
       Upon execution of above, we would have the following rows:
 
