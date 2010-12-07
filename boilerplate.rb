@@ -1,16 +1,12 @@
 require 'rubygems'
-
-dep = Gem::Dependency.new('activerecord', "=2.1.2")
-activerecord_gem = Gem::SourceIndex.from_installed_gems.search(dep).first
-gem 'activerecord', '=2.1.2'
-require activerecord_gem.full_gem_path + '/lib/activerecord.rb'
+require 'activerecord'
 
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 ActiveRecord::Base.establish_connection(
   :adapter  => "mysql",
   :host     => "localhost",
   :username => "root",
-  :password => "azriroot",
+  :password => "letmein",
   :database => "test",
   :charset => "latin1"
 )

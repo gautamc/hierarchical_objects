@@ -95,4 +95,14 @@
 
       For a more complete description of the currently implemented features and examples view main_rspec.rb
 
+6. To execute:
+  
+   $ ruby main.rb
+   OR
+   $ rspec main_rspec.rb
+
+   When run for the first time, comment the following at lines 9 and 12:
+   CreateTreeEncoding.down
+   CreateHierarchicalObjects.down
+
  - Gautam Chekuri
